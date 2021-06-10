@@ -1,0 +1,1 @@
+insert into user (id,username, password, fname, lname) values (101,'akky','$2a$10$eCGARyVkqFRJ7pnTowqNG.nN5NxQ/mT8xnmUzLTQ8puUHlaN51vE2','Akshay','Kshirsagar');
