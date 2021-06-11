@@ -7,9 +7,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +23,6 @@ public class MainController {
 	
 	@PostMapping(value="/login")
 	public ResponseEntity<?> login(@RequestBody User user) {
-		System.out.println(user.getUsername() + ".." + user.getPassword());
 		
 		if(userService.checkIfUserPresent(user)) {
 			try {
@@ -43,12 +39,8 @@ public class MainController {
 	
 	@PostMapping("/register")
 	public ResponseEntity<?> registration(@RequestBody @Valid User user) {
-		System.out.println("inside register");
 		
-		/*
-		 * if(bindingResult.hasErrors()) { return
-		 * ResponseEntity.badRequest().body(bindingResult); } else
-		 */if (userService.checkIfUserPresent(user)) {
+		if (userService.checkIfUserPresent(user)) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		} else {
 			userService.save(user);

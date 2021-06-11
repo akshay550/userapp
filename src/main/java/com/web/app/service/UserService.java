@@ -27,6 +27,7 @@ public class UserService {
 		StringBuilder rawPasswd = new StringBuilder(user.getPassword());
 		user = repo.findByUsername(user.getUsername());
 		if (encoder.matches(rawPasswd, user.getPassword())) {
+			user.setPassword(rawPasswd.toString());
 			return user;
 		} else {
 			throw new Exception("Invalid Login Credentials");
